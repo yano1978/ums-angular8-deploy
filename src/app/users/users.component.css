@@ -1,0 +1,26 @@
+table{
+ border: 1px solid #c0c0c0;
+ border-collapse: collapse;
+}
+
+caption{
+  font-size: 30px;
+  color: blueviolet;
+  background-color: chartreuse;
+  border: 2px double yellow;
+}
+
+td,th{
+  padding:5px;
+  border: 1px solid #fff;
+  text-align: center;
+}
+th {
+  background: #000;
+  color: green;
+
+}
+td {
+  background-color:silver;
+  color: red;
+}
