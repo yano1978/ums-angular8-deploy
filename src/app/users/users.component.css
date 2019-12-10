@@ -9,8 +9,9 @@ caption{
   background-color: chartreuse;
   border: 2px double yellow;
 }
-
-td,th{
+th {
+  background: #000;
+  color: green;
   padding:5px;
   border: 1px solid #fff;
   text-align: center;
