@@ -1,4 +1,4 @@
-<form class="userForm">
+<form class="userForm" #f="ngForm"> {{f.form.value | json}}
   <div class="form-group">
     <label for="firstname">Nome</label>
     <input type="hidden" name="id" [(ngModel)]="user.id">
@@ -29,6 +29,7 @@
     <input [(ngModel)]="user.age" name="age" id="age" type="number">
   </div>
   <div class="form-group form-footer">
+    <button (click)="resetForm(f.form)" class="btn-reset">RESETTA</button>
     <button (click)="saveUser()" class="btn-save">SALVA</button>
   </div>
 </form>
