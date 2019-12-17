@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   }
   deleteUser() {
     //this.userService.deleteUser(this.user);
-    this.onDeleteUser.emit(this.user);
+    this.onDeleteUser.emit(this.user); 
   }
   updateUser() {
     //this.userService.deleteUser(this.user);

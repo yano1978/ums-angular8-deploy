@@ -1,10 +1,13 @@
-<h1>User Management System</h1>
-<a href="#" (click)="newUser()">Nuovo Utente</a>
-<div class="main">
-  <div class="users">
-    <app-users (updateUser)="updateUser($event)"></app-users>
+<app-nav (onNewUser)="newUser()"></app-nav>
+<app-modal-basic></app-modal-basic>
+<div class="container-fluid">
+  <h1>User Management System</h1>
+  <div class="row">
+    <div class="col-md-7">
+      <app-users (updateUser)="updateUser($event)"></app-users>
+    </div>
+    <div class="col-md-5" *ngIf="showForm">
+      <app-user-detail [user]="userSelected"></app-user-detail>
+    </div>
   </div>
-  <div class="userDetail" *ngIf="showForm">
-    <app-user-detail [user]="userSelected"></app-user-detail>
   </div>
-</div>

@@ -7,7 +7,7 @@ import { User } from './classes/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'UMS';
+  title = 'UMS - Bootstrap Version';
   showForm = false;
   userSelected: User = new User();
   updateUser(user: User) {
