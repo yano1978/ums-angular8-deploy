@@ -5,14 +5,19 @@
 <td>{{user.province}}</td>
 <td class="buttons">
   <div class="row">
-    <div class="col-sm-6">
-      <button class="btn btn-primary btn-sm" (click)="updateUser()">
-        <fa name="pencil"></fa>
+    <div class="col-sm-4">
+      <button class="btn btn-primary btn-sm" (click)="showUserDetail()">
+        <fa name="info" fixed="true"></fa>
       </button>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
+      <button class="btn btn-primary btn-sm" (click)="updateUser()">
+        <fa name="pencil" fixed="true"></fa>
+      </button>
+    </div>
+    <div class="col-sm-4">
       <button class="btn btn-danger btn-sm" (click)="deleteUser()">
-        <fa name="trash-o"></fa>
+        <fa name="trash-o" fixed="true"></fa>
       </button>
     </div>
   </div>

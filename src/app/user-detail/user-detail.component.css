@@ -1,0 +1,7 @@
+.form-footer > .btn {
+    margin: 0px 2px;
+}
+
+input.ng-invalid{
+    border: 1px solid red;
+}

@@ -1,71 +1,35 @@
 import { Injectable } from '@angular/core';
+import { UserInterface } from '../interfaces/user';
 import { User } from '../classes/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 
 export class UserService {
-    users: User[] = [
-        {
-            id: 1,
-            name: 'Ernesto1',
-            lastname: 'Ianuario1',
-            email: 'yano1978@gmail.com',
-            fiscalcode: 'NRIRST78R02E435P',
-            province: 'Pesaro',
-            phone: '603245336',
-            age: 41
-        },
-        {
-            id: 2,
-            name: 'Ernesto2',
-            lastname: 'Ianuario2',
-            email: 'yano1978@gmail.com',
-            fiscalcode: 'NRIRST78R02E415P',
-            province: 'Pesaro',
-            phone: '603245336',
-            age: 41
-        },
-        {
-            id: 3,
-            name: 'Ernesto3',
-            lastname: 'Ianuario3',
-            email: 'yano1978@gmail.com',
-            fiscalcode: 'NRIRST78R02E415P',
-            province: 'Pesaro',
-            phone: '603245336',
-            age: 41
-        },
-        {
-            id: 4,
-            name: 'Ernesto4',
-            lastname: 'Ianuario4',
-            email: 'yano1978@gmail.com',
-            fiscalcode: 'NRIRST78R02E415P',
-            province: 'Pesaro',
-            phone: '603245336',
-            age: 41
-        }
-    ];
-    constructor() {
+    users: User[] = [];
+    private APIURL = 'http://localhost:8001/users';
+
+
+    constructor(private http:HttpClient) {
     }
     getUsers() {
-        return this.users;
+        return this.http.get(this.APIURL);
     }
+
+    getUser(id: number) {
+        return this.http.get(this.APIURL + '/' + id);
+    }
+
     deleteUser(user) {
-        let index = this.users.indexOf(user);
-        if (index >= 0) {
-            this.users.splice(index, 1);
-        }
+        const data = {'_method' : 'DELETE'};
+        return this.http.post(this.APIURL + '/' + user.id , data);
     }
-    updateUser(user: User) {
-        const idx = this.users.findIndex((v) => v.id === user.id);
-        alert('L\'utente ' + idx + ' è stato modificato con successo!');
-        if (idx !== -1) {
-            this.users[idx] = user;
-        }
+    updateUser(user: UserInterface) {
+        user['_method'] = 'PUT';
+        return this.http.post(this.APIURL + '/' + user.id , user);
     }
-    createUser(user: User) {
-        this.users.splice(0, 0, user);
+    createUser(user: UserInterface) {
+        return this.http.post(this.APIURL, user); 
     }
 }
 

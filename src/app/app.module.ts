@@ -12,6 +12,9 @@ import { NavComponent } from './nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 import { RouterModule, Routes } from '@angular/router';
+import { UserDataComponent } from './user-data/user-data.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 const routes: Routes = [
   {
@@ -19,13 +22,21 @@ const routes: Routes = [
     component: UsersComponent
   },
   {
-    path: 'users',
-    redirectTo: 'users',
+    path: '',
     pathMatch: 'full',
+    redirectTo: 'users'
   },
   {
     path: 'users/new',
-    component: UserComponent
+    component: UserDetailComponent
+  },
+  {
+    path: 'users/:id/edit',
+    component: UserDetailComponent
+  },
+  {
+    path: 'users/:id',
+    component: UserDataComponent
   }
 ];
 
@@ -36,14 +47,16 @@ const routes: Routes = [
     UserComponent,
     UserDetailComponent,
     NavComponent,
-    ModalBasicComponent
+    ModalBasicComponent,
+    UserDataComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFontAwesomeModule,
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

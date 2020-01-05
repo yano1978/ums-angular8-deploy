@@ -9,7 +9,8 @@ import { User } from './classes/user';
 export class AppComponent {
   title = 'UMS - Bootstrap Version';
   showForm = false;
-  userSelected: User = new User();
+  userSelected = new User();
+
   updateUser(user: User) {
     this.showForm = true;
     this.userSelected = user;
