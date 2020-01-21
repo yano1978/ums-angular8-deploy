@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
   }
   deleteUser() {
     //this.userService.deleteUser(this.user);
-    this.onDeleteUser.emit(this.user); 
+    this.onDeleteUser.emit(this.user);
   }
   updateUser() {
     this.route.navigate(['users', this.user.id, 'edit']);
@@ -30,5 +30,6 @@ export class UserComponent implements OnInit {
   }
   showUserDetail(){
     this.route.navigate(['users', this.user.id]);
+    this.onSelectUser.emit(this.user);
   }
 }

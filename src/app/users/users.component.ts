@@ -13,28 +13,20 @@ export class UsersComponent implements OnInit {
   title = 'Utenti';
   users: User[] = [];
   @Output('updateUser') updateUser = new EventEmitter<User>();
-  constructor(private service: UserService) {
+
+  constructor(private userService: UserService) {
   }
+
   ngOnInit() {
-  this.service.getUsers().subscribe(
-      response => this.users = response['data']
-  );
+    this.users = this.userService.getUsers();
   }
+
   onDeleteUser(user: User) {
-    const deleteUser = confirm('Vuoi veramente eliminare l\'utente ' + user.name + user.lastname);
-    if (deleteUser) {
-      this.service.deleteUser(user).subscribe(
-      response => {
-        const idx = this.users.indexOf(user);
-        this.users.splice(idx, 1);
-        alert(response['message']);
-      }
-    );
-    }
+
+    this.userService.deleteUser(user);
   }
+
   onSelectUser(user: User) {
-    //alert(user.lastname);
-    //this.updateUser.emit(user);
     const userCopy = Object.assign({}, user);
     this.updateUser.emit(userCopy);
   }
