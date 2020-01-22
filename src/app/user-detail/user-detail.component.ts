@@ -31,17 +31,38 @@ export class UserDetailComponent implements OnInit {
       if (!params.id) {
         return;
       }
-      this.user = this.userService.getUser(+params.id);
+      // We do the subscribe here
+
+     // this.user = this.userService.getUser(+params.id);
+     this.userService.getUser(+params.id).subscribe(
+       response => this.user = response['data']
+     )
     });
   }
 
   saveUser() {
     if (this.user.id > 0) {
-      this.userService.updateUser(this.user);
+      // Old static method to save the user
+
+      //this.userService.updateUser(this.user);
+
+      // Subscribe to save the user receive from the user service
+      this.userService.updateUser(this.user).subscribe(
+        response => {
+          const user = response['data'] as User;
+          if(response['success']){
+            alert('L\'Utente ' + user.name + ' è stato modificato correttamente');
+          } else {
+            alert(response['message']);
+          }
+          this.router.navigate(["users"]);
+        }
+
+      )
+
     } else {
       this.userService.createUser(this.user);
     }
-    this.router.navigate(["users"]);
   }
 
   resetForm(f) {

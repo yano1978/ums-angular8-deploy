@@ -1,62 +1,35 @@
 import {Injectable} from '@angular/core';
 import {UserInterface} from '../interfaces/user';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../classes/user';
 
 @Injectable()
 
 export class UserService {
-  users: UserInterface[] = [
-    {
-      id: 1,
-      name: 'Ernesto1',
-      lastname: 'Ianuario',
-      email: 'yano1978@gmail.com',
-      fiscalcode: 'RSAHRN72M22Z444S',
-      province: 'Pesaro',
-      phone: '454545455',
-      age: 41
+  users: User[] = [];
+  private APIURL = 'http://localhost:8000/users';
 
-    },
-    {
-      id: 2,
-      name: 'Ernesto2',
-      lastname: 'Ianuario',
-      email: 'yano1978@gmail.com',
-      fiscalcode: 'RSAHRN72M22Z444S',
-      province: 'Pesaro',
-      phone: '454545455',
-      age: 41
-    },
-    {
-      id: 3,
-      name: 'Ernesto3',
-      lastname: 'Ianuario',
-      email: 'yano1978@gmail.com',
-      fiscalcode: 'RSAHRN72M22Z444S',
-      province: 'Pesaro',
-      phone: '454545455',
-      age: 41
-    },
-    {
-      id: 4,
-      name: 'Ernesto4',
-      lastname: 'Ianuario',
-      email: 'yano1978@gmail.com',
-      fiscalcode: 'RSAHRN72M22Z444S',
-      province: 'Pesaro',
-      phone: '454545455',
-      age: 41
-    }
-  ];
-
-  constructor() {
+  constructor(private http:HttpClient) {
   }
 
   getUsers() {
-    return this.users;
+    // We make the subscribe client side
+
+    // this.http.get(this.APIURL).subscribe(
+    //   data => {
+    //     console.log(data)
+    //   },
+    //   error => alert(error.message)
+    // )
+    // return this.users;
+    return this.http.get(this.APIURL);
   }
 
-  getUser(id: number): UserInterface {
-    return this.users.find(user => user.id === id);
+  getUser(id: number) {
+    // Now we always return a promise
+
+    //return this.users.find(user => user.id === id);
+    return this.http.get(this.APIURL + '/' + id);
   }
 
   deleteUser(user: UserInterface) {
@@ -68,11 +41,17 @@ export class UserService {
   }
 
   updateUser(user: UserInterface) {
-    const idx = this.users.findIndex((v) => v.id === user.id);
-    alert(idx);
-    if (idx !== -1) {
-      this.users[idx] = user;
-    }
+    // Old static method to change datas value
+
+    // const idx = this.users.findIndex((v) => v.id === user.id);
+    // alert(idx);
+    // if (idx !== -1) {
+    //   this.users[idx] = user;
+    // }
+
+    // We receive data to change the data value from the service
+    user['_method'] = 'PUT';
+    return this.http.post(this.APIURL + '/' + user.id, user);
   }
 
 

@@ -18,7 +18,12 @@ export class UserDataComponent implements OnInit {
     this.User = new User();
     this.route.params.subscribe(
       (p) => {
-          this.User = this.userService.getUser(+p.id);
+         // Here we receive the promise
+
+         //this.User = this.userService.getUser(+p.id);
+         this.userService.getUser(+p.id).subscribe(
+            response => this.User = response['data']
+         )
       }
     );
   }
