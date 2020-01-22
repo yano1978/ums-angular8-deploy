@@ -33,36 +33,46 @@ export class UserDetailComponent implements OnInit {
       }
       // We do the subscribe here
 
-     // this.user = this.userService.getUser(+params.id);
-     this.userService.getUser(+params.id).subscribe(
-       response => this.user = response['data']
-     )
+      // this.user = this.userService.getUser(+params.id);
+      this.userService
+        .getUser(+params.id)
+        .subscribe(response => (this.user = response["data"]));
     });
   }
 
   saveUser() {
     if (this.user.id > 0) {
-      // Old static method to save the user
-
-      //this.userService.updateUser(this.user);
-
-      // Subscribe to save the user receive from the user service
-      this.userService.updateUser(this.user).subscribe(
-        response => {
-          const user = response['data'] as User;
-          if(response['success']){
-            alert('L\'Utente ' + user.name + ' è stato modificato correttamente');
-          } else {
-            alert(response['message']);
-          }
-          this.router.navigate(["users"]);
-        }
-
-      )
-
+      this.updateUser(this.user);
     } else {
-      this.userService.createUser(this.user);
+      this.createUser(this.user);
     }
+  }
+
+  updateUser(user: User) {
+    // Old static method to save the user
+
+    //this.userService.updateUser(this.user);
+
+    // Subscribe to save the user receive from the user service
+    this.userService.updateUser(this.user).subscribe(response => {
+      if (response["success"]) {
+        alert("L'Utente " + user.name + " è stato modificato correttamente");
+        this.router.navigate(["users"]);
+      } else {
+        alert(response["message"]);
+      }
+    });
+  }
+
+  createUser(user: User) {
+    this.userService.createUser(this.user).subscribe(response => {
+      if (response["success"]) {
+        alert("L'Utente " + user.name + " è stato creato correttamente");
+        this.router.navigate(["users"]);
+      } else {
+        alert(response["message"]);
+      }
+    });
   }
 
   resetForm(f) {
@@ -73,7 +83,7 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-  backToUsers(){
-    this.router.navigate(['users']);
+  backToUsers() {
+    this.router.navigate(["users"]);
   }
 }

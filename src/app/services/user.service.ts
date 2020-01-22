@@ -56,8 +56,14 @@ export class UserService {
 
 
   createUser(user: UserInterface) {
-    user.id = this.users.length + 1;
-    this.users.splice(0, 0, user);
+    // Old static method to change datas value
+
+    // user.id = this.users.length + 1;
+    // this.users.splice(0, 0, user);
+
+    // We receive data to create a new user in the service
+
+    return this.http.post(this.APIURL, user);
 
   }
 }
