@@ -33,11 +33,14 @@ export class UserService {
   }
 
   deleteUser(user: UserInterface) {
-    const index = this.users.indexOf(user);
-    if (index >= 0) {
-      this.users.splice(index, 1);
-    }
+    // Old static method to delete a user
 
+    // const index = this.users.indexOf(user);
+    // if (index >= 0) {
+    //   this.users.splice(index, 1);
+    // }
+    const data = {_method : 'DELETE'};
+    return this.http.post(this.APIURL + '/' + user.id, data);
   }
 
   updateUser(user: UserInterface) {

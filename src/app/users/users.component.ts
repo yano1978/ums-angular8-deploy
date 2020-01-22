@@ -24,9 +24,19 @@ export class UsersComponent implements OnInit {
   }
 
   onDeleteUser(user: User) {
+    // Old static method to delete the user
 
-    this.userService.deleteUser(user);
+    //this.userService.deleteUser(user);
+
+    // Here we receive the promise to to delete the user
+
+    this.userService.deleteUser(user).subscribe(
+      response => {
+        alert(response['message']);
+      }
+    )
   }
+
 
   onSelectUser(user: User) {
     const userCopy = Object.assign({}, user);
