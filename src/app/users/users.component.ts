@@ -1,26 +1,24 @@
-import { User } from './../classes/user';
-import { Component, OnInit, Output } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { EventEmitter } from '@angular/core';
+import { User } from "./../classes/user";
+import { Component, OnInit, Output } from "@angular/core";
+import { UserService } from "../services/user.service";
+import { EventEmitter } from "@angular/core";
 
 @Component({
-  selector : 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls : ['./users.component.css']
+  selector: "app-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.css"]
 })
-
 export class UsersComponent implements OnInit {
-  title = 'Utenti';
+  title = "Utenti";
   users: User[] = [];
-  @Output('updateUser') updateUser = new EventEmitter<User>();
+  @Output("updateUser") updateUser = new EventEmitter<User>();
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      response => this.users = response['data']
-    );
+    this.userService
+      .getUsers()
+      .subscribe(response => (this.users = response["data"]));
   }
 
   onDeleteUser(user: User) {
@@ -29,14 +27,15 @@ export class UsersComponent implements OnInit {
     //this.userService.deleteUser(user);
 
     // Here we receive the promise to to delete the user
-
-    this.userService.deleteUser(user).subscribe(
-      response => {
-        alert(response['message']);
-      }
-    )
+    const deleteUser = confirm('Sei sicuro di voler eliminare l\'utente ' + user['name'] + user['lastname'] + ' ?');
+    if(deleteUser){
+      this.userService.deleteUser(user).subscribe(response => {
+        const idx = this.users.indexOf(user);
+        this.users.splice(idx, 1);
+        alert(response["message"]);
+        });
+     }
   }
-
 
   onSelectUser(user: User) {
     const userCopy = Object.assign({}, user);
