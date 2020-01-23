@@ -28,6 +28,17 @@ export class NavComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  signIn(e){
+    e.preventDefault();
+    this.router.navigate(['login']);
+  }
+
+  signUp(e){
+    e.preventDefault();
+    this.auth.logOut();
+    this.router.navigate(['signup']);
+  }
+
   /*toggleMenu(){
     this.showMenu = !this.showMenu;
   }*/

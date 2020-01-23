@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { AuthService } from "../services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  constructor(private auth: AuthService, private router: Router) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  signIn(form: NgForm){
-    alert(form.valid);
-    alert(form.value.email);
+  signIn(form: NgForm) {
+    if (!form.valid) {
+      return false;
+    }
+    let result = this.auth.signIn(form.value.email, form.value.password);
+    if (result) {
+      this.router.navigate(['']);
+    }
   }
 }

@@ -5,7 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'tr[app-user]',
+  selector: 'tr[app-user]', 
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
