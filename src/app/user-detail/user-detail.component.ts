@@ -26,7 +26,9 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = new User();
+    this.user = new User();/*
+    // params DEPRECATED soon
+
     this.route.params.subscribe(params => {
       if (!params.id) {
         return;
@@ -38,6 +40,20 @@ export class UserDetailComponent implements OnInit {
         .getUser(+params.id)
         .subscribe(response => (this.user = response["data"]));
     });
+    */
+   // New mapping Observable method pararMap
+
+   this.route.paramMap.subscribe(params => {
+    if (!params.get('id')) {
+      return;
+    }
+    // We do the subscribe here
+
+    // this.user = this.userService.getUser(+params.id);
+    this.userService
+      .getUser(+params.get('id'))
+      .subscribe(response => (this.user = response["data"]));
+  });
   }
 
   saveUser() {
