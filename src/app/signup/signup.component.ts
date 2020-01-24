@@ -17,11 +17,14 @@ export class SignupComponent implements OnInit {
 
   signUp(form: NgForm) {
   //  alert(form.valid);
-  const result = this.auth.signUp(form.value.email, form.value.password, form.value.name);
+  const result = this.auth.signUp(form.value.name, form.value.email, form.value.password);
   if (!result) {
       return false;
     } else {
-      this.router.navigate(['']);
+     // I can handle to redirect to the login page or login directly!
+     // alert('La registrazione è avvenuta con successo, ora effettua il login')
+     // this.router.navigate(['login']);
+     this.router.navigate(['']);
     }
   }
 }

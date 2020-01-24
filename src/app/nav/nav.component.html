@@ -25,10 +25,13 @@
         <a *ngIf="!isUserLoggedIn" class="nav-link" href="#" (click)="signIn($event)">Accedi</a>
       </li>
       <li class="nav-item text-nowrap">
-        <a *ngIf="isUserLoggedIn" class="nav-link" href="#" (click)="logOut($event)">Esci</a>
+        <a *ngIf="!isUserLoggedIn" class="nav-link" href="#" (click)="signUp($event)">Registrati</a>
+      </li>
+      <li *ngIf="isUserLoggedIn" style="color: greenyellow;" class="nav-link text-nowrap">
+        {{ userName }}
       </li>
       <li class="nav-item text-nowrap">
-        <a *ngIf="!isUserLoggedIn" class="nav-link" href="#" (click)="signUp($event)">Registrati</a>
+        <a *ngIf="isUserLoggedIn" class="nav-link" href="#" (click)="logOut($event)">Esci</a>
       </li>
     </ul>
   </div>

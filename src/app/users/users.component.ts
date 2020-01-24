@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
     //this.userService.deleteUser(user);
 
     // Here we receive the promise to to delete the user
-    const deleteUser = confirm('Sei sicuro di voler eliminare l\'utente ' + user['name'] + user['lastname'] + ' ?');
+    const deleteUser = confirm('Sei sicuro di voler eliminare l\'utente ' + user['name'] + ' ' + user['lastname'] + ' ?');
     if(deleteUser){
       this.userService.deleteUser(user).subscribe(response => {
         const idx = this.users.indexOf(user);
