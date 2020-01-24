@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   signIn(form: NgForm) {
     if (!form.valid) {
-      return false;
+      return false; 
     }
     let result = this.auth.signIn(form.value.email, form.value.password);
     if (result) {
