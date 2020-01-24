@@ -10,10 +10,10 @@
         <a class="nav-link" href="#" routerLink="">Home <span class="sr-only"></span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#" routerLink="users">Utenti <span class="sr-only"></span></a>
+        <a class="nav-link" href="#" *ngIf="isUserLoggedIn" routerLink="users">Utenti <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
-        <a href="#" routerLink="users/new" class="nav-link"><span class="sr-only"></span>Nuovo Utente</a>
+        <a href="#" routerLink="users/new" *ngIf="isUserLoggedIn" class="nav-link"><span class="sr-only"></span>Nuovo Utente</a>
       </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0">

@@ -37,7 +37,9 @@ export class UserService {
     // Now we always return a promise
 
     //return this.users.find(user => user.id === id);
-    return this.http.get(this.APIURL + '/' + id);
+    return this.http.get(this.APIURL + '/' + id, {
+      headers: this.getAuthHeader()
+    });
   }
 
   deleteUser(user: UserInterface) {
@@ -48,7 +50,9 @@ export class UserService {
     //   this.users.splice(index, 1);
     // }
     const data = { _method: 'DELETE' };
-    return this.http.post(this.APIURL + '/' + user.id, data);
+    return this.http.post(this.APIURL + '/' + user.id, data/*, {
+      headers: this.getAuthHeader()
+    }*/);
   }
 
   updateUser(user: UserInterface) {
@@ -62,7 +66,9 @@ export class UserService {
 
     // We receive data to change the data value from the service
     user['_method'] = 'PUT';
-    return this.http.post(this.APIURL + '/' + user.id, user);
+    return this.http.post(this.APIURL + '/' + user.id, user, {
+      headers: this.getAuthHeader()
+    });
   }
 
   createUser(user: UserInterface) {
@@ -73,6 +79,8 @@ export class UserService {
 
     // We receive data to create a new user in the service
 
-    return this.http.post(this.APIURL, user);
+    return this.http.post(this.APIURL, user, {
+      headers: this.getAuthHeader()
+    });
   }
 }

@@ -16,11 +16,13 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'users'
+    redirectTo: 'users',
+    canActivate : [RouteGuardService]
   },
   {
     path: 'users/new',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate : [RouteGuardService]
   },
   {
     path: 'users/:id/edit',
@@ -29,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'users/:id',
-    component: UserDataComponent
+    component: UserDataComponent,
+    canActivate : [RouteGuardService]
   },
   {
     path: 'login',
