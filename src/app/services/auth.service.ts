@@ -1,3 +1,4 @@
+import { UserInterface } from './../interfaces/user';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, EventEmitter, Output } from "@angular/core";
 import { User } from "../classes/user";
@@ -72,5 +73,17 @@ export class AuthService {
     localStorage.removeItem('user');
     this.userLogOut.emit();
     return (this.isUserLogged = false);
+  }
+  getUser(): User {
+    const data = JSON.parse(localStorage.getItem('user'));
+    const user = new User();
+    if (data) {
+      user.name = data[('user_name')];
+      //user.email = email[('email')];
+    }
+    return user;
+  }
+  getToken() {
+    return localStorage.getItem('token');
   }
 }

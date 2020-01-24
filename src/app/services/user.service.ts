@@ -1,15 +1,21 @@
-import {Injectable} from '@angular/core';
-import {UserInterface} from '../interfaces/user';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../classes/user';
+import { Injectable } from "@angular/core";
+import { UserInterface } from "../interfaces/user";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { User } from "../classes/user";
+import { AuthService } from "./auth.service";
 
 @Injectable()
-
 export class UserService {
   users: User[] = [];
-  private APIURL = 'http://localhost:8000/users';
+  private APIURL = "http://localhost:8000/users";
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {}
+
+  getAuthHeader(): HttpHeaders {
+    const headers = new HttpHeaders({
+      Authorization: "Bearer " + this.auth.getToken()
+    });
+    return headers;
   }
 
   getUsers() {
@@ -22,7 +28,9 @@ export class UserService {
     //   error => alert(error.message)
     // )
     // return this.users;
-    return this.http.get(this.APIURL);
+    return this.http.get(this.APIURL, {
+      headers: this.getAuthHeader()
+    });
   }
 
   getUser(id: number) {
@@ -39,7 +47,7 @@ export class UserService {
     // if (index >= 0) {
     //   this.users.splice(index, 1);
     // }
-    const data = {_method : 'DELETE'};
+    const data = { _method: 'DELETE' };
     return this.http.post(this.APIURL + '/' + user.id, data);
   }
 
@@ -57,7 +65,6 @@ export class UserService {
     return this.http.post(this.APIURL + '/' + user.id, user);
   }
 
-
   createUser(user: UserInterface) {
     // Old static method to change datas value
 
@@ -67,7 +74,5 @@ export class UserService {
     // We receive data to create a new user in the service
 
     return this.http.post(this.APIURL, user);
-
   }
 }
-

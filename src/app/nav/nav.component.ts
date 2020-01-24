@@ -42,6 +42,10 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.isUserLoggedIn = this.auth.isUserLoggedIn();
+    if (this.isUserLoggedIn) {
+      const user = this.auth.getUser();
+      this.userName = user.name;
+    }
   }
   newUser() {
     this.onNewUser.emit();

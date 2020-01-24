@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
     if (!form.valid) {
       return false; 
     }
-    let result = this.auth.signIn(form.value.email, form.value.password);
-    if (result) {
+    const result = this.auth.signIn(form.value.email, form.value.password);
+    if (result != null) {
       this.router.navigate(['']);
     }
   }
