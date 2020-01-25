@@ -7,5 +7,5 @@ export interface UserInterface {
     fiscalcode: string;
     province: string;
     phone: string;
-    age: number;
+    age: number; 
 }
