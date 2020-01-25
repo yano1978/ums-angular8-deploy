@@ -50,9 +50,9 @@ export class UserService {
     //   this.users.splice(index, 1);
     // }
     const data = { _method: 'DELETE' };
-    return this.http.post(this.APIURL + '/' + user.id, data/*, {
+    return this.http.post(this.APIURL + '/' + user.id, data, {
       headers: this.getAuthHeader()
-    }*/);
+    });
   }
 
   updateUser(user: UserInterface) {

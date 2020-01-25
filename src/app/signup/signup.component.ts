@@ -10,21 +10,29 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {
+    auth.userSignedUp.subscribe(
+      () => {
+        router.navigate(['login']);
+      }
+    );
+   }
 
   ngOnInit() {
   }
 
   signUp(form: NgForm) {
   //  alert(form.valid);
-  const result = this.auth.signUp(form.value.name, form.value.email, form.value.password);
-  if (!result) {
+  /*const result = this.auth.signUp(form.value.name, form.value.email, form.value.password);
+  /*if (!result) {
       return false;
     } else {
      // I can handle to redirect to the login page or login directly!
      // alert('La registrazione è avvenuta con successo, ora effettua il login')
      // this.router.navigate(['login']);
      this.router.navigate(['']);
-    }
+    }*/
+    this.auth.signUp(form.value.name, form.value.email, form.value.password);
+    alert('Registrazione avvenuta con successo, ora effettua il log in');
   }
 }
