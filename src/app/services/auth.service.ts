@@ -1,7 +1,7 @@
-import { UserInterface } from './../interfaces/user';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable, EventEmitter, Output } from "@angular/core";
-import { User } from "../classes/user";
+import { environment } from './../../environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { User } from '../classes/user';
 
 interface Jwt {
   access_token: string;
@@ -12,7 +12,7 @@ interface Jwt {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
   private isUserLogged = false;
@@ -20,22 +20,21 @@ export class AuthService {
   @Output() userSignedIn = new EventEmitter<User>();
   @Output() userSignedUp = new EventEmitter<User>();
   @Output() userLogOut = new EventEmitter();
-  private APIAUTHURL = "http://localhost:8000/api/auth/";
+  private APIAUTHURL = environment.APIAUTH;
   constructor(private http: HttpClient) {}
   isUserLoggedIn() {
-    this.isUserLogged = !!localStorage.getItem("token");
+    this.isUserLogged = !!localStorage.getItem('token');
     return this.isUserLogged;
   }
   signIn(email: string, password: string) {
-    //alert(email + ' ' + password);
     this.http
-      .post(this.APIAUTHURL + "login", {
+      .post(this.APIAUTHURL + 'login', {
         email: email,
         password: password
       })
       .subscribe(
         (payload: Jwt) => {
-          localStorage.setItem("token", payload.access_token);
+          localStorage.setItem('token', payload.access_token);
           console.log(payload);
           localStorage.setItem('user', JSON.stringify(payload));
           const user = new User();
@@ -47,39 +46,22 @@ export class AuthService {
         (httpResp: HttpErrorResponse) => {
           alert(httpResp.message);
         }
-      ); /*
-    localStorage.setItem("token", email);
-    const user = new User();
-    user.name = "Connesso";
-    user.email = email;
-    this.userSignedIn.emit(user);
-    return true;
-    */
+      );
   }
 
   signUp(username: string, email: string, password: string) {
-    // Old fake signup
-
-    /*localStorage.setItem("token", email);
-    const user = new User();
-    user.name = "Benvenuto, " + username;
-    user.email = email;
-    this.userSignedUp.emit(user);
-    this.userSignedIn.emit(user);
-    return true;
-    */
    const user = new User();
    user.name = username;
    user.email = email;
    this.http
-      .post(this.APIAUTHURL + "signup", {
+      .post(this.APIAUTHURL + 'signup', {
         email: email,
         password: password,
         name : username
       })
       .subscribe(
         (payload: Jwt) => {
-          localStorage.setItem("token", payload.access_token);
+          localStorage.setItem('token', payload.access_token);
           console.log(payload);
           localStorage.setItem('user', JSON.stringify(payload));
           this.userSignedUp.emit(user);
@@ -92,8 +74,7 @@ export class AuthService {
   }
 
   logOut() {
-    //return this.isUserLogged = false;
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.userLogOut.emit();
     return (this.isUserLogged = false);
@@ -103,7 +84,6 @@ export class AuthService {
     const user = new User();
     if (data) {
       user.name = data[('user_name')];
-      //user.email = email[('email')];
     }
     return user;
   }

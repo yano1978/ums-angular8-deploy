@@ -13,8 +13,8 @@ export class NavComponent implements OnInit {
   isCollapsed = false;
   //showMenu = false;
   @Output() onNewUser = new EventEmitter();
-  private isUserLoggedIn = false;
-  private userName: string;
+  public isUserLoggedIn = false;
+  public userName: string;
   constructor(private auth: AuthService, private router: Router) {
     // Promise of the Login
     auth.userSignedIn.subscribe(
