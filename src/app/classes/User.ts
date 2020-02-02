@@ -8,7 +8,7 @@ export class User implements UserInterface {
     fiscalcode: string;
     province: string;
     phone: string;
-    age: number;
+    age: number; 
 
     constructor(){
     this.id = 0;

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  APIRUL : 'http://localhost:8000/users',
-  APIAUTH : 'http://localhost:8000/api/auth/'
+  APIRUL : 'http://glacial-stream-86487.herokuapp.com/users',
+  APIAUTH : 'http://glacial-stream-86487.herokuapp.com/api/auth'
 };

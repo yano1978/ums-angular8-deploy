@@ -1,4 +1,4 @@
-import { User } from './../classes/user';
+import { User } from '../classes/user';
 import { UserService } from '../services/user.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';

@@ -8,4 +8,4 @@ export interface UserInterface {
     province: string;
     phone: string;
     age: number; 
-}
+} 
