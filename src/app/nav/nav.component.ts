@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../classes/user';
+import { User } from '../classes/User';
 
 @Component({
   selector: 'app-nav',

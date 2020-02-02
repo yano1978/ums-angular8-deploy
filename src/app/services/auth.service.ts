@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { User } from '../classes/user';
+import { User } from '../classes/User';
 
 interface Jwt {
   access_token: string;
